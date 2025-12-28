@@ -1,0 +1,54 @@
+/* Login Page Specific Styles */
+
+/* Desktop */
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  .login-page .auth-container {
+    padding: 40px 20px;
+  }
+
+  .login-page .auth-box {
+    box-shadow: none;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .login-page .auth-container {
+    padding: 20px 15px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .login-page .auth-logo {
+    margin-bottom: 25px;
+  }
+
+  .login-page .form-input {
+    margin-bottom: 8px;
+  }
+
+  .login-page .form-button {
+    margin-top: 12px;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 360px) {
+  .login-page .auth-container {
+    padding: 15px 10px;
+  }
+
+  .login-page .auth-box {
+    padding: 25px 15px;
+  }
+}

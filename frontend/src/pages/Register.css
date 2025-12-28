@@ -1,0 +1,94 @@
+/* Register Page Specific Styles */
+
+/* Desktop */
+.register-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  .register-page .auth-container {
+    padding: 40px 20px;
+  }
+
+  .register-page .auth-box {
+    box-shadow: none;
+  }
+
+  .register-page .form-input {
+    margin-bottom: 6px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .register-page .auth-container {
+    padding: 20px 15px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .register-page .auth-logo {
+    margin-bottom: 20px;
+  }
+
+  .register-page .form-input {
+    margin-bottom: 5px;
+  }
+
+  .register-page .form-button {
+    margin-top: 10px;
+  }
+
+  .register-page .error-message {
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 360px) {
+  .register-page .auth-container {
+    padding: 15px 10px;
+  }
+
+  .register-page .auth-box {
+    padding: 20px 15px;
+  }
+
+  .register-page .auth-logo {
+    font-size: 32px;
+    margin-bottom: 15px;
+  }
+}
+
+/* Landscape Mode */
+@media (max-height: 500px) and (orientation: landscape) {
+  .register-page .auth-container {
+    padding: 10px 15px;
+  }
+
+  .register-page .auth-box {
+    padding: 20px;
+  }
+
+  .register-page .auth-logo {
+    font-size: 32px;
+    margin-bottom: 15px;
+  }
+
+  .register-page .form-input {
+    padding: 7px;
+    font-size: 12px;
+  }
+
+  .register-page .form-button {
+    padding: 7px 14px;
+    font-size: 13px;
+  }
+}
