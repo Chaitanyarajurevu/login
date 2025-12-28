@@ -1,17 +1,21 @@
+# Root level gitignore
+
 # Dependencies
 node_modules/
+*/node_modules/
 
 # Environment variables
 .env
 .env.local
 .env.production
+*/.env
+*/.env.local
 
 # Logs
 logs
 *.log
 npm-debug.log*
 yarn-debug.log*
-yarn-error.log*
 
 # OS files
 .DS_Store
@@ -23,6 +27,16 @@ Thumbs.db
 *.swp
 *.swo
 
-# Build
+# Build outputs
 dist/
 build/
+*/dist/
+*/build/
+
+# Lock files (optional - uncomment if needed)
+# package-lock.json
+# yarn.lock
+
+# Temporary files
+.vite/
+.cache/
