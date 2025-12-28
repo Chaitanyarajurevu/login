@@ -20,6 +20,21 @@ app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
+// Root route for Render health check
+app.get('/', (req, res) => {
+  res.json({ 
+    status: 'OK', 
+    message: 'InstaClone Backend is live on Render 🚀',
+    version: '1.0.0',
+    endpoints: {
+      health: '/api/health',
+      auth: '/api/auth',
+      posts: '/api/posts',
+      users: '/api/users'
+    }
+  })
+})
+
 // Routes
 app.use('/api/auth', authRoutes)
 app.use('/api/posts', postRoutes)
