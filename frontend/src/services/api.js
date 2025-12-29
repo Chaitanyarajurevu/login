@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-// Base API URL
-const API_BASE_URL = 'http://localhost:5000/api'
+// Base API URL - Production backend on Render
+const API_BASE_URL = 'https://login-jae4.onrender.com/api'
 
 // Create axios instance with default config
 const api = axios.create({

@@ -15,8 +15,17 @@ const app = express()
 // Connect to MongoDB
 connectDB()
 
+// CORS Configuration - Allow all origins for now
+const corsOptions = {
+  origin: '*', // Allow all origins (you can restrict this later)
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
+  optionsSuccessStatus: 200
+}
+
 // Middleware
-app.use(cors())
+app.use(cors(corsOptions))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
