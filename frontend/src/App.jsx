@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import Home from './pages/Home'
+import ForgotPassword from './pages/ForgotPassword'
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
@@ -41,6 +42,14 @@ function App() {
           element={
             <PublicRoute>
               <Register setIsAuthenticated={setIsAuthenticated} />
+            </PublicRoute>
+          } 
+        />
+        <Route 
+          path="/forgot-password" 
+          element={
+            <PublicRoute>
+              <ForgotPassword />
             </PublicRoute>
           } 
         />

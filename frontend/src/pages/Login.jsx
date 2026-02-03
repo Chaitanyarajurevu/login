@@ -129,6 +129,12 @@ function Login({ setIsAuthenticated }) {
             
             {apiError && <div className="error-message">{apiError}</div>}
           </form>
+
+          <div className="auth-divider">OR</div>
+
+          <Link to="/forgot-password" className="forgot-password-link">
+            Forgot Password?
+          </Link>
         </div>
         
         <div className="auth-switch">

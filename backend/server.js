@@ -5,6 +5,7 @@ import connectDB from './config/db.js'
 import authRoutes from './routes/authRoutes.js'
 import postRoutes from './routes/postRoutes.js'
 import userRoutes from './routes/userRoutes.js'
+import passwordRoutes from './routes/passwordRoutes.js'
 
 // Load environment variables
 dotenv.config()
@@ -39,7 +40,8 @@ app.get('/', (req, res) => {
       health: '/api/health',
       auth: '/api/auth',
       posts: '/api/posts',
-      users: '/api/users'
+      users: '/api/users',
+      password: '/api/password'
     }
   })
 })
@@ -48,6 +50,7 @@ app.get('/', (req, res) => {
 app.use('/api/auth', authRoutes)
 app.use('/api/posts', postRoutes)
 app.use('/api/users', userRoutes)
+app.use('/api/password', passwordRoutes)
 
 // Health check route
 app.get('/api/health', (req, res) => {

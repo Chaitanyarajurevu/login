@@ -291,3 +291,16 @@ html {
     font-size: 14px;
   }
 }
+
+.forgot-password-link {
+  display: block;
+  text-align: center;
+  color: #00376b;
+  text-decoration: none;
+  font-size: 12px;
+  margin-top: 12px;
+}
+
+.forgot-password-link:hover {
+  text-decoration: underline;
+}
