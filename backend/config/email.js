@@ -2,22 +2,41 @@ import nodemailer from 'nodemailer'
 
 // Create transporter
 const createTransporter = () => {
-  return nodemailer.createTransport({
+  // Log configuration status
+  console.log('Creating email transporter...')
+  console.log('EMAIL_USER:', process.env.EMAIL_USER ? 'Configured' : 'MISSING')
+  console.log('EMAIL_PASSWORD:', process.env.EMAIL_PASSWORD ? 'Configured' : 'MISSING')
+
+  if (!process.env.EMAIL_USER || !process.env.EMAIL_PASSWORD) {
+    throw new Error('Email credentials not configured. Please set EMAIL_USER and EMAIL_PASSWORD environment variables.')
+  }
+
+  return nodemailer.createTransporter({
     service: 'gmail',
     auth: {
       user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_PASSWORD
-    }
+    },
+    // Add timeout and retry options
+    connectionTimeout: 10000,
+    greetingTimeout: 10000,
+    socketTimeout: 10000
   })
 }
 
 // Send OTP email
 export const sendOTPEmail = async (email, otp) => {
   try {
+    console.log('Attempting to send OTP email to:', email)
+    
     const transporter = createTransporter()
 
+    // Verify transporter before sending
+    await transporter.verify()
+    console.log('Email transporter verified successfully')
+
     const mailOptions = {
-      from: process.env.EMAIL_USER,
+      from: `InstaClone <${process.env.EMAIL_USER}>`,
       to: email,
       subject: 'InstaClone - Password Reset OTP',
       html: `
@@ -37,10 +56,15 @@ export const sendOTPEmail = async (email, otp) => {
     }
 
     const info = await transporter.sendMail(mailOptions)
-    console.log('OTP email sent:', info.messageId)
+    console.log('✅ OTP email sent successfully:', info.messageId)
+    console.log('Accepted:', info.accepted)
+    console.log('Rejected:', info.rejected)
+    
     return { success: true, messageId: info.messageId }
   } catch (error) {
-    console.error('Error sending OTP email:', error)
+    console.error('❌ Error sending OTP email:', error.message)
+    console.error('Error code:', error.code)
+    console.error('Full error:', error)
     throw error
   }
 }
