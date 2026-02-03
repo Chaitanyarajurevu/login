@@ -30,7 +30,9 @@ export const forgotPassword = async (req, res) => {
 
     // Generate OTP
     const otp = generateOTP()
-    console.log('Generated OTP:', otp)
+    console.log('=================================')
+    console.log('Generated OTP for', email, ':', otp)
+    console.log('=================================')
 
     // Delete any existing OTPs for this email
     await OTP.deleteMany({ email })
@@ -40,6 +42,26 @@ export const forgotPassword = async (req, res) => {
 
     // Send OTP via email
     try {
+      // Check if email credentials are configured
+      if (!process.env.EMAIL_USER || !process.env.EMAIL_PASSWORD) {
+        console.error('Email credentials not configured!')
+        console.log('EMAIL_USER:', process.env.EMAIL_USER ? 'Set' : 'Not set')
+        console.log('EMAIL_PASSWORD:', process.env.EMAIL_PASSWORD ? 'Set' : 'Not set')
+        
+        // For development, return OTP in response
+        if (process.env.NODE_ENV === 'development') {
+          return res.json({ 
+            success: true,
+            message: 'OTP generated (email not configured)',
+            otp: otp // Only in development
+          })
+        }
+        
+        return res.status(500).json({ 
+          message: 'Email service not configured. Please contact administrator.' 
+        })
+      }
+
       await sendOTPEmail(email, otp)
       console.log('OTP sent successfully to:', email)
       
@@ -49,13 +71,23 @@ export const forgotPassword = async (req, res) => {
       })
     } catch (emailError) {
       console.error('Email sending failed:', emailError)
+      
+      // Log OTP to console as fallback
+      console.log('=================================')
+      console.log('EMAIL FAILED - OTP for', email, ':', otp)
+      console.log('=================================')
+      
       res.status(500).json({ 
-        message: 'Failed to send OTP email. Please try again later.' 
+        message: 'Failed to send OTP email. Please try again later.',
+        error: emailError.message
       })
     }
   } catch (error) {
     console.error('Forgot password error:', error)
-    res.status(500).json({ message: 'Server error. Please try again.' })
+    res.status(500).json({ 
+      message: 'Server error. Please try again.',
+      error: error.message 
+    })
   }
 }
 
